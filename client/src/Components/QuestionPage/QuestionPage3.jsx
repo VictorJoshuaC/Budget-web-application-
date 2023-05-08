@@ -1,5 +1,6 @@
 import { GrCheckboxSelected, GrCheckbox } from "react-icons/gr";
 import spendingImage from "../../assets/img/spending.png";
+import { Link } from "react-router-dom";
 
 const QuestionPage3 = () => {
   return (
@@ -33,9 +34,11 @@ const QuestionPage3 = () => {
             <span className="ml-4 text-lg sm:text-xl">clothing</span>{" "}
           </p>
         </div>
-        <button className="ml-16 mt-16 bg-[#0077B5] py-3 px-12 rounded-md text-white text-2xl">
-          Next
-        </button>
+        <Link to="/dashboard">
+          <button className="ml-16 mt-16 bg-[#0077B5] py-3 px-12 rounded-md text-white text-2xl">
+            Get started
+          </button>
+        </Link>
       </div>
 
       <div className="sm:w-1/2  text-4xl leading-14 pt-28 sm:pl-16  flex justify-center">

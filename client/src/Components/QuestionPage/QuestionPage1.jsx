@@ -1,5 +1,6 @@
 import { GrCheckboxSelected, GrCheckbox } from "react-icons/gr";
 import earnImage from "../../assets/img/earn.png";
+import { Link } from "react-router-dom";
 
 const QuestionPage1 = () => {
   return (
@@ -25,9 +26,11 @@ const QuestionPage1 = () => {
             <span className="ml-4 text-lg sm:text-xl">Employed</span>{" "}
           </p>
         </div>
-        <button className="ml-16 mt-16 bg-[#0077B5] py-3 px-12 rounded-md text-white text-2xl">
-          Next
-        </button>
+        <Link to="/often">
+          <button className="ml-16 mt-16 bg-[#0077B5] py-3 px-12 rounded-md text-white text-2xl">
+            Next
+          </button>
+        </Link>
       </div>
 
       <div className="sm:w-1/2  text-4xl leading-14 pt-28 sm:pl-16  flex justify-center">
