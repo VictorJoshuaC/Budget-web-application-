@@ -1,32 +1,58 @@
+import { useState } from "react";
 import { GrCheckboxSelected, GrCheckbox } from "react-icons/gr";
 import earnImage from "../../assets/img/earn.png";
 import { Link } from "react-router-dom";
 
+function ProgressBar({ progress }) {
+  return (
+    <div style={{ width: "20%", height: "10px", backgroundColor: "#ddd" }}>
+      <div
+        style={{
+          width: `${progress}%`,
+          height: "10px",
+          backgroundColor: "#0077B5",
+          borderRadius: "10px",
+        }}
+      ></div>
+    </div>
+  );
+}
+
 const QuestionPage1 = () => {
+  const [progress, setProgress] = useState(33.3);
+
+  function updateProgress() {
+    setProgress(33.3);
+  }
+
   return (
     <div className="h-full flex flex-col justify-between sm:flex-row sm:h-auto">
       <div className="sm:w-1/2">
         <h1 className="font-bold font-open-sans text-4xl leading-14 text-[#0077B5] pt-20 pl-16">
           Savvysaver
         </h1>
-        <h2 className="font-semibold font-open-sans text-4xl leading-14 pt-16  pl-16">
+          <div className="mt-[50px] mx-16">
+          <p className="px-8 pb-2">1 of 3</p>
+          <ProgressBar progress={progress} />
+        </div>
+        <h2 className="font-semibold font-open-sans text-4xl leading-14 pt-6  pl-16">
           How do you earn a living?
         </h2>
         <div className="sm:pl-16 pl-16">
           <p className="sm:pt-16 flex">
             <GrCheckboxSelected className="mt-[0.5rem]" />
-            <span className="ml-4 text-lg sm:text-xl">Student</span>{" "}
+            <span className="ml-4 text-lg sm:text-xl">Student</span>
           </p>
           <p className="pt-4 flex">
             <GrCheckbox className="mt-[0.5rem]" />
-            <span className="ml-4 text-lg sm:text-xl">Self employed</span>{" "}
+            <span className="ml-4 text-lg sm:text-xl">Self employed</span>
           </p>
           <p className="pt-4 flex">
             <GrCheckboxSelected className="mt-[0.5rem]" />
-            <span className="ml-4 text-lg sm:text-xl">Employed</span>{" "}
+            <span className="ml-4 text-lg sm:text-xl">Employed</span>
           </p>
         </div>
-        <Link to="/often">
+        <Link to="/often" onClick={updateProgress}>
           <button className="ml-16 mt-16 bg-[#0077B5] py-3 px-12 rounded-md text-white text-2xl">
             Next
           </button>
