@@ -16,6 +16,39 @@ export const Home = () => {
     0
   );
 
+  const budgetScale = cart.map((item, index) => {
+    let width = "90%"; // Default progress bar width
+
+    if (item.amount >= 1 && item.amount <= 5000) {
+      width = "30%";
+    } else if (item.amount > 5000 && item.amount <= 10000) {
+      width = "50%";
+    } else if (item.amount > 10000 && item.amount <= 50000) {
+      width = "60%";
+    }
+
+    return (
+      <div key={index}>
+        <div className="mt-4">
+          <div className="flex">
+            <div
+              className={`w-4/5 overflow-hidden h-2 bg-black/20 rounded-full`}
+            >
+              <div
+                style={{
+                  width,
+                  height: "100%",
+                  backgroundColor: "red",
+                }}
+              ></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
+  });
+
   return (
     <div className={`w-full pt-[5%] overflow-hidden`}>
       <Modal />
@@ -171,25 +204,7 @@ export const Home = () => {
           </div>
           <div className="w-[27%]  border border-black/5 pl-2 pr-2 shadow-black/20 shadow-lg rounded-2xl">
             <h1 className="mt-5">Budget</h1>
-            {cart.map((item, index) => {
-              return (
-                <div key={index}>
-                  <div className="mt-4">
-                    <div
-                      className={`w-4/5 overflow-hidden h-2 bg-black/20 rounded-full`}
-                    >
-                      <div
-                        style={{
-                          width: `${item.amount.length <= 1000 && "50%"}`,
-                          height: "100%",
-                          backgroundColor: "red",
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {budgetScale}
           </div>
         </div>
       </div>
