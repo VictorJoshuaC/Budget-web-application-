@@ -66,6 +66,48 @@ const MyContextApi = ({ children }) => {
     setErrorMsg("");
   }, 5000);
 
+  const [addYourBill, setAddYourBill] = useState(false);
+  const addBill = () => {
+    setAddYourBill(true);
+  };
+  const [addYourGoal, setAddYourGoal] = useState(false);
+
+  const addGoal = () => {
+    setAddYourGoal(true);
+  };
+
+  const closeAddBill = () => {
+    setAddYourBill(false);
+    setAddYourGoal(false);
+  };
+
+  const [billInfo, setBillInfo] = useState({
+    receiver: "",
+    type: "",
+    date: "",
+    amount: "",
+  });
+
+  const handleBillsChange = (event) => {
+    const { name, value } = event.target;
+    setBillInfo({
+      ...billInfo,
+      [name]: value,
+    });
+  };
+
+  const [progress, setProgress] = useState(0);
+  const [cart, setCart] = useState([]);
+  const preventDefault = (e) => {
+    e.preventDefault();
+    setCart([...cart, billInfo]);
+    setAddYourBill(false);
+    setBillInfo("");
+    setProgress(progress + 5);
+  };
+
+  const { receiver, type, date, amount } = billInfo;
+
   return (
     <div>
       <contextAPI.Provider
@@ -83,6 +125,19 @@ const MyContextApi = ({ children }) => {
           // email2,
           // password2,
           userName,
+          addBill,
+          addYourBill,
+          closeAddBill,
+          handleBillsChange,
+          preventDefault,
+          receiver,
+          type,
+          date,
+          amount,
+          cart,
+          addGoal,
+          addYourGoal,
+          progress,
         }}
       >
         {" "}

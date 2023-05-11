@@ -19,7 +19,7 @@ export const SignUp = () => {
         <div className="flex justify-center items-center gap-3 w-2/5 bg-[#6666d3] py-2 rounded-lg">
           <button className="flex gap-3 items-center text-white text-lg font-bold ">
             <FcGoogle className="text-lg" />
-            Sign up with google
+            Sign up with Google
           </button>
         </div>
       </div>
