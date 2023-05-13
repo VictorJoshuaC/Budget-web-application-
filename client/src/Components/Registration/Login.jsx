@@ -64,7 +64,7 @@ export const Login = () => {
           state2.password2 === state.password &&
           state2.email2 === state.email ? (
             <Link
-              to="/dashboard"
+              to="/question1"
               className="border w-full border-[#6666d3] font-bold text-xl text-[#6666d3] py-3 rounded-md px-5 outline-none"
             >
               {" "}
