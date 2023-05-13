@@ -10,8 +10,15 @@ const MyContextApi = ({ children }) => {
     password: "",
     email: "",
   });
+  const [state3, setState3] = useState({
+    username3: "",
+    password3: "",
+    email3: "",
+    income: "",
+  });
 
   const { userName, password, email } = state;
+  const { username3, password3, email3, income } = state3;
 
   const [state2, setState2] = useState({
     password2: "",
@@ -30,6 +37,14 @@ const MyContextApi = ({ children }) => {
       [e.target.name]: e.target.value,
     }));
   };
+  const handleInput3 = (e) => {
+    setState3((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+
+    setState3Error("");
+  };
 
   const { password2, email2 } = state2;
 
@@ -41,6 +56,26 @@ const MyContextApi = ({ children }) => {
       email.trim() === ""
     ) {
       setErrorMsg("Not every input is filled");
+    }
+  };
+  const [stateError, setState3Error] = useState("");
+  const [userAccount, setUserAccount] = useState([]);
+
+  const handleSubmit3 = (e) => {
+    e.preventDefault();
+    setUserAccount([state3]);
+    if (
+      username3.length <= 0 ||
+      email3.length <= 0 ||
+      password3.length <= 0 ||
+      income.length <= 0
+    ) {
+      setState3Error("Not every input is filled");
+      return;
+    } else {
+      console.log(userAccount);
+      setAddYourAccount(false);
+      setState3Error("");
     }
   };
 
@@ -79,6 +114,8 @@ const MyContextApi = ({ children }) => {
   const closeAddBill = () => {
     setAddYourBill(false);
     setAddYourGoal(false);
+    setAddYourAccount(false);
+    setState3Error("");
   };
 
   const [billInfo, setBillInfo] = useState({
@@ -106,6 +143,10 @@ const MyContextApi = ({ children }) => {
     setProgress(progress + 5);
   };
 
+  const [addYourAccount, setAddYourAccount] = useState(false);
+  const addAccount = () => {
+    setAddYourAccount(true);
+  };
   const { receiver, type, date, amount } = billInfo;
 
   return (
@@ -118,6 +159,8 @@ const MyContextApi = ({ children }) => {
           handleSubmit,
           handleSubmit2,
           handleInput2,
+          handleSubmit3,
+          handleInput3,
           errorMsg,
           success,
           // password,
@@ -138,6 +181,14 @@ const MyContextApi = ({ children }) => {
           addGoal,
           addYourGoal,
           progress,
+          addYourAccount,
+          addAccount,
+          username3,
+          email3,
+          income,
+          password3,
+          stateError,
+          userAccount,
         }}
       >
         {" "}

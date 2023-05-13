@@ -6,22 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-<<<<<<< HEAD
     "start":"vite",
-
-    "start": "vite",    
-=======
-    "start": "vite",
->>>>>>> 453643ab58da0844b4efc5094298523bc7460e9e
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "lint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@ramonak/react-progress-bar": "^5.0.3",
-=======
-    "netlify-cli": "^15.0.2",
->>>>>>> 453643ab58da0844b4efc5094298523bc7460e9e
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",

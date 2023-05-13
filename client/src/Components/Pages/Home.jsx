@@ -1,49 +1,69 @@
-import React, { useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
-import { BsPlus } from "react-icons/bs";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { contextAPI } from "../MyContextApi";
 import { Modal } from "./Modal";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const { addBill, cart, addGoal, amount } = useContext(contextAPI);
+  const { addBill, cart, addGoal, addAccount, userAccount } =
+    useContext(contextAPI);
   console.log(cart);
   const totalPrice = cart.reduce(
     (accumulator, item) => accumulator + Number(item.amount),
     0
   );
-
+  const [accountProgress, setAccountProgress] = useState("50");
   const budgetScale = cart.map((item, index) => {
-    let width = "90%"; // Default progress bar width
-
+    let width = "90%";
+    let backgroundColor = "";
+    let percentage = "0";
     if (item.amount >= 1 && item.amount <= 5000) {
-      width = "30%";
+      width = "20%";
+      backgroundColor = "gray";
+      percentage = "20";
     } else if (item.amount > 5000 && item.amount <= 10000) {
-      width = "50%";
+      width = "30%";
+      backgroundColor = "blue";
+      percentage = "30";
     } else if (item.amount > 10000 && item.amount <= 50000) {
-      width = "60%";
+      width = "50%";
+      backgroundColor = "#ff8a65";
+      percentage = "50";
+    } else if (item.amount > 50000 && item.amount <= 100000) {
+      width = "70%";
+      backgroundColor = "#4d4d4d";
+      percentage = "70";
+    } else if (item.amount > 100000 && item.amount <= 150000) {
+      width = "80%";
+      backgroundColor = "#ff2b41";
+      percentage = "80";
+    } else if (item.amount > 150000) {
+      width = "90%";
+      backgroundColor = "#9ccc5";
+      percentage = "90";
     }
 
     return (
       <div key={index}>
         <div className="mt-4">
-          <div className="flex">
+          <div
+            className={`w-4/5 h-2  flex items-center gap-x-2 justify-between bg-black/20 rounded-full`}
+          >
             <div
-              className={`w-4/5 overflow-hidden h-2 bg-black/20 rounded-full`}
-            >
-              <div
-                style={{
-                  width,
-                  height: "100%",
-                  backgroundColor: "red",
-                }}
-              ></div>
-            </div>
-
+              style={{
+                width,
+                height: "100%",
+                backgroundColor,
+              }}
+            ></div>
+            <p className="text-lg font-bold text-black/50 pl-[18%] absolute">
+              {percentage}%
+            </p>
           </div>
+          <p className="text-black/40 font-semibold text-sm">{item.type}</p>
         </div>
       </div>
     );
@@ -70,14 +90,24 @@ export const Home = () => {
                   <h2 className="font-normal text-3xl text-black/60">
                     Accounts
                   </h2>
-                  <IoMdAddCircle className="text-3xl text-black/50" />
+                  <IoMdAddCircle
+                    onClick={addAccount}
+                    className="text-3xl text-black/50 cursor-pointer"
+                  />
                 </div>
                 <div className="w-full flex flex-col text-lg font-semibold text-black/40 border-black/5 border shadow-black/20 shadow-lg  py-5 px-5 rounded-xl">
                   <div className="flex justify-between ">
-                    <p>Andrew</p>
+                    {userAccount.length <= 0 ? (
+                      <p> Account Unknown</p>
+                    ) : (
+                      userAccount.map((item, index) => (
+                        <h1 key={index}>{item.username3}</h1>
+                      ))
+                    )}
+                    <div />
                     <div className="flex gap-2">
-                      <p>
-                        <AiOutlineEdit />
+                      <p className="cursor-pointer">
+                        <AiOutlineEdit onClick={addAccount} />
                       </p>
                       <p>
                         <Link to="/dashboard/settings">
@@ -93,13 +123,16 @@ export const Home = () => {
                     ₦50,000
                   </p>
                 </div>
-                <div className="w-full ml-5 py-10">
-                  <ProgressBar
-                    completed={50}
-                    bgColor="grey"
-                    animateOnRender={true}
-                    className="w-4/5 pl-10"
-                  />
+                <div className="my-5 flex justify-center">
+                  <div className="w-4/5 h-2 rounded-full  bg-black/10">
+                    <div
+                      style={{
+                        width: `${accountProgress}%`,
+                        height: "100%",
+                        backgroundColor: "blue",
+                      }}
+                    ></div>
+                  </div>
                 </div>
                 <div className="flex justify-between px-5 pb-5 ">
                   <p className="text-gray-400">Monthly budget limit</p>
@@ -117,12 +150,16 @@ export const Home = () => {
                   </div>
                   <div className="mb-2">
                     <p className="text-[#3bca3b] text-lg font-semibold">
-                      ₦100,000
+                      {userAccount.map((item, index) => (
+                        <h1 key={index}>{item.income}</h1>
+                      ))}
                     </p>
                     <p className="text-gray-400 text-sm">Income</p>
                   </div>
                   <div className="mb-10">
-                    <p className="text-[red] font-semibold text-lg">₦50,000</p>
+                    <p className="text-[red] font-semibold text-lg">
+                      ₦{totalPrice}
+                    </p>
                     <p className="text-gray-400 text-sm">Expenses</p>
                   </div>
                   <p className="font-semibold text-black/70">Deactivate</p>
@@ -142,7 +179,6 @@ export const Home = () => {
                   className=" mt-7 bg-[blue] w-2/5 rounded-lg py-1 text-white flex justify-center items-center text-sm gap-1"
                 >
                   Add Bill
-                  <BsPlus className="text-lg text-white" />
                 </button>
               </div>
             </div>
@@ -156,7 +192,6 @@ export const Home = () => {
                   className="mt-7 bg-[blue] w-2/5 rounded-lg py-1 text-white flex justify-center items-center text-sm gap-1"
                 >
                   Add Goals
-                  <BsPlus className="text-lg text-white" />
                 </button>
               </div>
             </div>
@@ -170,7 +205,7 @@ export const Home = () => {
             </h1>
             <div className="pb-7">
               <ul className="grid grid-cols-4 gap-10 text-center text-black/50 font-normal">
-                <li>Receive</li>
+                <li>Receiver</li>
                 <li>Type</li>
                 <li>Date</li>
                 <li>Amount</li>
@@ -182,7 +217,9 @@ export const Home = () => {
                       <li className="text-black">{item.receiver}</li>
                       <li className="font-normal">{item.type}</li>
                       <li className="font-normal">{item.date}</li>
-                      <li className="text-black">₦{item.amount}</li>
+                      <li className="text-black/70 font-bold">
+                        ₦{item.amount}
+                      </li>
                     </ul>
                   </div>
                 );
@@ -203,8 +240,17 @@ export const Home = () => {
             </div>
           </div>
           <div className="w-[27%]  border border-black/5 pl-2 pr-2 shadow-black/20 shadow-lg rounded-2xl">
-            <h1 className="mt-5">Budget</h1>
+            <h1 className="mt-5 font-bold text-lg text-black/60 ">Budget</h1>
             {budgetScale}
+            {cart.length <= 0 && (
+              <Fragment>
+                <div className="flex justify-center h-full mt-5  text-black/30 font-semibold">
+                  <h1 className=" text-center w-3/4 text-sm">
+                    Budget is empty, Click Add Bill to Make a Budget
+                  </h1>
+                </div>{" "}
+              </Fragment>
+            )}
           </div>
         </div>
       </div>

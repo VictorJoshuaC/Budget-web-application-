@@ -1,8 +1,9 @@
+import React from 'react'
 import { GrCheckboxSelected, GrCheckbox } from "react-icons/gr";
-import earnImage from "../../assets/img/earn.png";
+import spendingImage from "../../assets/img/spending.png";
 import { Link } from "react-router-dom";
 
-const QuestionPage1 = () => {
+export const QuestionPage3 = () => {
   return (
     <div className="h-full flex flex-col justify-between sm:flex-row sm:h-auto">
       <div className="sm:w-1/2">
@@ -10,34 +11,40 @@ const QuestionPage1 = () => {
           Savvysaver
         </h1>
         <h2 className="font-semibold font-open-sans text-4xl leading-14 pt-16  pl-16">
-          How do you earn a living?
+          What are you major spending?
         </h2>
         <div className="sm:pl-16 pl-16">
           <p className="sm:pt-16 flex">
             <GrCheckboxSelected className="mt-[0.5rem]" />
-            <span className="ml-4 text-lg sm:text-xl">Student</span>{" "}
+            <span className="ml-4 text-lg sm:text-xl">Rent</span>
           </p>
           <p className="pt-4 flex">
             <GrCheckbox className="mt-[0.5rem]" />
-            <span className="ml-4 text-lg sm:text-xl">Self employed</span>{" "}
+            <span className="ml-4 text-lg sm:text-xl">Transport</span>
           </p>
           <p className="pt-4 flex">
             <GrCheckboxSelected className="mt-[0.5rem]" />
-            <span className="ml-4 text-lg sm:text-xl">Employed</span>{" "}
+            <span className="ml-4 text-lg sm:text-xl">Tuition</span>{" "}
+          </p>
+          <p className="pt-4 flex">
+            <GrCheckbox className="mt-[0.5rem]" />
+            <span className="ml-4 text-lg sm:text-xl">Feeding</span>
+          </p>
+          <p className="pt-4 flex">
+            <GrCheckbox className="mt-[0.5rem]" />
+            <span className="ml-4 text-lg sm:text-xl">clothing</span>{" "}
           </p>
         </div>
-        <Link to="/often">
+        <Link to="/dashboard">
           <button className="ml-16 mt-16 bg-[#0077B5] py-3 px-12 rounded-md text-white text-2xl">
-            Next
+            Get started
           </button>
         </Link>
       </div>
 
       <div className="sm:w-1/2  text-4xl leading-14 pt-28 sm:pl-16  flex justify-center">
-        <img src={earnImage} className="w-[300px] sm:w-[512px]" alt="" />
+        <img src={spendingImage} className="w-[300px] sm:w-[512px]" alt="" />
       </div>
     </div>
   );
-};
-
-export default QuestionPage1;
+}

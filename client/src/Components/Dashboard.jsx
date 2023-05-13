@@ -11,7 +11,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { Link, Outlet } from "react-router-dom";
 
 export const Dashboard = () => {
-  const { userName } = useContext(contextAPI);
+  const { userAccount } = useContext(contextAPI);
   return (
     <div className="w-full h-auto">
       <div className="flex justify-between items-center fixed w-full z-40 px-10 py-5 text-white bg-[#6666d3]">
@@ -26,7 +26,7 @@ export const Dashboard = () => {
             <CiSearch />
           </button>
         </form>
-        <ul className="flex gap-3 text-lg">
+        <ul className="flex w-[15%] gap-3 text-lg">
           <li>
             <AiFillMessage />
           </li>
@@ -36,7 +36,11 @@ export const Dashboard = () => {
           <li>
             <FaUserCircle />
           </li>
-          <li className="text-white text-xs">{userName}</li>
+          <li className="text-white text-xs ">
+            {userAccount.map((item, index) => (
+              <p key={index}>{item.username3}</p>
+            ))}
+          </li>
         </ul>
       </div>
       <div className="w-full flex justify-between">
